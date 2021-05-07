@@ -1,0 +1,59 @@
+{
+  "version": 2,
+  "cli": {
+    "defaultCollection": "@nrwl/express"
+  },
+  "defaultProject": "my-home-library-node-express",
+  "projects": {
+    "my-home-library-node-express": {
+      "root": "apps/my-home-library-node-express",
+      "sourceRoot": "apps/my-home-library-node-express/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/my-home-library-node-express",
+            "main": "apps/my-home-library-node-express/src/main.ts",
+            "tsConfig": "apps/my-home-library-node-express/tsconfig.app.json",
+            "assets": ["apps/my-home-library-node-express/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/my-home-library-node-express/src/environments/environment.ts",
+                  "with": "apps/my-home-library-node-express/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "my-home-library-node-express:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/my-home-library-node-express/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/my-home-library-node-express"],
+          "options": {
+            "jestConfig": "apps/my-home-library-node-express/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  }
+}
