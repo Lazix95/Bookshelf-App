@@ -1,0 +1,6 @@
+{
+  "$schema": "../../../../../node_modules/nx-electron/src/validation/maker.schema.json",
+  "mac": {
+    "icon": "apps/elec-test/src/assets/menu-logo.png"
+  }
+}

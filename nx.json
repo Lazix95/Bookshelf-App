@@ -16,14 +16,36 @@
   "npmScope": "lazix-nx-monorepo",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "accessToken": "ZmRlOWIxZTgtZDVjOC00YWVlLWIzZDItNzg4YWM1MzdlZDQwfHJlYWQtd3JpdGU=",
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
       }
     }
   },
   "projects": {
-    "my-home-library-node-express": {
+    "my-home-library": {
+      "tags": []
+    },
+    "my-home-library-e2e": {
+      "tags": [],
+      "implicitDependencies": ["my-home-library"]
+    },
+    "small-app": {
+      "tags": []
+    },
+    "small-app-v2": {
+      "tags": []
+    },
+    "small-app-v3": {
+      "tags": []
+    },
+    "elec-test": {
+      "tags": []
+    },
+    "my-home-library-express": {
       "tags": []
     }
   }

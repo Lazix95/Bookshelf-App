@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@lazix-nx-monorepo/small-app": ["libs/small-app/src/index.ts"],
+      "@lazix-nx-monorepo/small-app-v2": ["libs/small-app-v2/src/index.ts"],
+      "@lazix-nx-monorepo/small-app-v3": ["libs/small-app-v3/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
