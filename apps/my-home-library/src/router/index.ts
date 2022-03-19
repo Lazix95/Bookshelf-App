@@ -15,12 +15,39 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: '/',
-    name: 'Home',
-    component: () => import('../pages/Home/Home.vue'),
+    path: '',
+    component: () => import('../pages/Books/Books.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Books',
+        component: () => import('../components/Books/BookList.vue'),
+        meta: {
+          title: 'Books',
+          add: true,
+        }
+      },
+      {
+        path: '/book/:bookID',
+        name: 'Books.edit',
+        component: () => import('../components/Books/BookForm.vue'),
+        meta: {
+          title: 'Update Book',
+        }
+      },
+      {
+        path: 'add-new-book',
+        name: 'Books.add',
+        component: () => import('../components/Books/BookForm.vue'),
+        meta: {
+          title: 'Add New Book',
+        }
+      }
+    ],
   },
 ];
 
+console.log(process.env.BASE_URL)
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,

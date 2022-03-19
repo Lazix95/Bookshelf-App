@@ -1,5 +1,6 @@
 import { sendRequest } from './index';
 import { Token, User } from '../store/modules/auth/models';
+import { AxiosResponse } from 'axios';
 
 export interface RegisterApiPayload {
   email: string,
@@ -12,6 +13,7 @@ export interface RegisterApiPayload {
 export interface LoginApiPayload {
   email: string,
   password: string,
+  rememberMe?: boolean,
 }
 
 interface LoginResponse {
@@ -19,12 +21,24 @@ interface LoginResponse {
   userData: User
 }
 
+interface MeResponse {
+  userData: User,
+}
+
 export class authApi {
-  static register(payload: RegisterApiPayload) {
-    return sendRequest<LoginResponse>({method: 'post', url: '/register', data: payload});
+  static register(payload: RegisterApiPayload): Promise<AxiosResponse<LoginResponse>>  {
+    return sendRequest<LoginResponse>({method: 'post', url: '/register', data: payload,});
   }
 
-  static login(payload: LoginApiPayload) {
+  static login(payload: LoginApiPayload): Promise<AxiosResponse<LoginResponse>> {
     return sendRequest<LoginResponse>({method: 'post', url: '/login', data: payload})
+  }
+
+  static me(token: string): Promise<AxiosResponse<MeResponse>> {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    }
+
+    return sendRequest<MeResponse>({method: 'get', url: '/me', headers});
   }
 }

@@ -40,11 +40,17 @@ app.use('/api', authRoutes);
 // Error handling middleware
 // Every next(error) will end up here
 app.use((error, req, res, next) => {
-  console.log(error.message, error.status);
+  console.log(error.validationMessages);
   const status = error.status || 500;
   const message = error.message;
+  const validationMessages = error.validationMessages;
   const data = error.data;
-  res.status(status).json({msg: message, data: data});
+  const payload = {
+    ...(message && {msg: message}),
+    ...(validationMessages && {validationMessages}),
+    data: data
+  }
+  res.status(status).json(payload);
 });
 
 const port = process.env.port || 3333;

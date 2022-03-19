@@ -10,7 +10,7 @@ export const login = async (req, res, next) => {
    const user = await User.findOne({email});
 
    if(!user) {
-     const error = new Err('Login failed wrong user credentials');
+     const error = new Err('Login failed, wrong user credentials');
      error.status = 401;
      throw error;
    }
@@ -18,7 +18,7 @@ export const login = async (req, res, next) => {
    const isEqual = await bcrypt.compare(password, user.password);
 
    if (!isEqual) {
-     const error = new Err('Login failed wrong user credentials');
+     const error = new Err('Login failed, wrong user credentials');
      error.status = 401;
      throw error;
    }
@@ -44,4 +44,16 @@ export const register = async (req, res, next) => {
    }
    next(err)
  }
+}
+
+export const me = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id);
+    res.status(200).json({userData: user});
+  } catch (err) {
+    if (err.status) {
+      err.status = 500
+    }
+    next(err)
+  }
 }

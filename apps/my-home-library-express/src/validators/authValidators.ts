@@ -26,3 +26,15 @@ export const checkUniqueUser = [
     return Promise.resolve();
   })
 ]
+
+export const checkConfirmPassword = [
+  check('confirmPassword')
+    .trim().not().isEmpty().withMessage('Confirm Password is required')
+    .custom(async (confirmPassword, {req}) => {
+    const password = req.body.password;
+
+    if(password !== confirmPassword){
+      throw new Error('Confirm Password must be same as Password')
+    }
+  })
+]

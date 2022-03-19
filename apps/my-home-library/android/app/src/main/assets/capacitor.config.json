@@ -1,0 +1,13 @@
+{
+  "appId": "com.myhomelib.lazix",
+  "appName": "My Home Library",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "../../dist/apps/my-home-library",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

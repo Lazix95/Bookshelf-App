@@ -7,8 +7,9 @@
           <v-divider class='pb-5 mt-3'></v-divider>
           <v-text-field dense v-model='email' outlined label='E-mail'/>
           <v-text-field type='password' dense hide-details v-model='password' outlined label='Password'/>
+          <v-checkbox label='Remember Me' hide-details v-model='rememberMe'/>
           <v-subheader light class='black--text'> You dont have an account, <router-link class='ml-1' :to='{ name: "register" }'>Register Here!</router-link> </v-subheader>
-          <v-btn width='100%' color='primary' @click='onLogin'>Login</v-btn>
+          <v-btn :loading='submitLoading' width='100%' color='primary' @click='onLogin'>Login</v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -21,14 +22,22 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class Login extends Vue {
   private email = '';
   private password = '';
+  private rememberMe = false;
+  private submitLoading = false
 
-  onLogin() {
+  onLogin(): void {
     const payload = {
       email: this.email,
       password: this.password,
+      rememberMe: this.rememberMe,
     }
 
-    this.$store.dispatch('auth/login', payload);
+    this.submitLoading = true;
+    this.$store.dispatch('auth/login', payload).then(() => {
+      this.submitLoading = false;
+    }).catch(() => {
+      this.submitLoading = false;
+    })
   }
 
 }

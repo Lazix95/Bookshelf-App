@@ -43,7 +43,12 @@ export const sendRequest = <T>(request: Request): Promise<AxiosResponse<T>> => {
   return axiosInstance.request(requestToSend).then(res => {
     return res as AxiosResponse<T>
   }).catch((err) => {
-    if (requestToSend.errorToastMessage) Vue.$toast.error(err.response.data.msg);
-    return err
+    if (requestToSend.errorToastMessage && err.response.data.msg) Vue.$toast.error(err.response.data.msg);
+    if (requestToSend.errorToastMessage && err.response.data.validationMessages) {
+      Object.values(err.response.data.validationMessages).forEach(message => {
+        Vue.$toast.error(message as string);
+      })
+    }
+    throw err;
   })
 }

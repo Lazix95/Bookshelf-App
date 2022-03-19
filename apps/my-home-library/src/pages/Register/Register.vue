@@ -5,12 +5,12 @@
         <p class='title'>Sing in to your library</p>
         <p class='subtitle'>Please enter your email and password</p>
         <v-divider class='pb-5 mt-3'></v-divider>
-        <v-text-field dense v-model='firstName' outlined label='First Name'/>
-        <v-text-field dense v-model='lastName' outlined label='Last Name'/>
-        <v-text-field dense v-model='email' outlined label='E-mail'/>
-        <v-text-field type='password' dense v-model='password' outlined label='Password'/>
-        <v-text-field type='password' dense v-model='confirmPassword' outlined label='Confirm Password'/>
-        <v-btn width='100%' color='primary' @click='onSignUp'>Submit</v-btn>
+        <v-text-field dense v-model='firstName' outlined label='First Name' :error-messages='errors.firstName'/>
+        <v-text-field dense v-model='lastName' outlined label='Last Name' :error-messages='errors.lastName'/>
+        <v-text-field dense v-model='email' outlined label='E-mail' :error-messages='errors.email'/>
+        <v-text-field type='password' dense v-model='password' outlined label='Password' :error-messages='errors.password'/>
+        <v-text-field type='password' dense v-model='confirmPassword' outlined label='Confirm Password' :error-messages='errors.confirmPassword'/>
+        <v-btn :loading='submitLoading' width='100%' color='primary' @click='onSignUp'>Submit</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -19,6 +19,7 @@
 <script lang='ts'>
 import { Component, Vue } from 'vue-property-decorator';
 import { RegisterApiPayload } from '../../api/auth';
+import { RegisterErrors } from './RegisterPageTypes';
 
 @Component
 export default class Login extends Vue {
@@ -27,8 +28,15 @@ export default class Login extends Vue {
   private email = '';
   private password = '';
   private confirmPassword = '';
+  private submitLoading = false;
+  private errors: RegisterErrors = {};
 
-  onSignUp() {
+  clearErrors(): void {
+    this.errors = {}
+  }
+
+   onSignUp() : void {
+    this.clearErrors();
     const payload: RegisterApiPayload = {
       firstName: this.firstName,
       lastName: this.lastName,
@@ -37,7 +45,15 @@ export default class Login extends Vue {
       confirmPassword: this.confirmPassword,
     }
 
-    this.$store.dispatch('auth/register', payload);
+    this.submitLoading = true;
+    this.$store.dispatch('auth/register', payload).then(() => {
+      this.submitLoading = false;
+      this.$router.push({ name: 'Books.vue' })
+    }).catch((err) => {
+      console.log('err => ',)
+      if (err.response.data.validationMessages) this.errors = err.response.data.validationMessages;
+      this.submitLoading = false;
+    })
   }
 
 }

@@ -45,15 +45,100 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/my-home-library/**/*.{ts,tsx,vue}"]
+            "lintFilePatterns": [
+              "apps/my-home-library/**/*.{ts,tsx,vue}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/my-home-library"],
+          "outputs": [
+            "coverage/apps/my-home-library"
+          ],
           "options": {
             "jestConfig": "apps/my-home-library/jest.config.js",
             "passWithNoTests": true
+          }
+        },
+        "cap": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "--help"
+          }
+        },
+        "add": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "add",
+            "packageInstall": true
+          },
+          "configurations": {
+            "ios": {
+              "cmd": "add ios"
+            },
+            "android": {
+              "cmd": "add android"
+            }
+          }
+        },
+        "copy": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "copy",
+            "packageInstall": false
+          },
+          "configurations": {
+            "ios": {
+              "cmd": "copy ios"
+            },
+            "android": {
+              "cmd": "copy android"
+            }
+          }
+        },
+        "open": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "open",
+            "packageInstall": false
+          },
+          "configurations": {
+            "ios": {
+              "cmd": "open ios"
+            },
+            "android": {
+              "cmd": "open android"
+            }
+          }
+        },
+        "sync": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "sync",
+            "packageInstall": true
+          },
+          "configurations": {
+            "ios": {
+              "cmd": "sync ios"
+            },
+            "android": {
+              "cmd": "sync android"
+            }
+          }
+        },
+        "update": {
+          "executor": "@nxtend/capacitor:cap",
+          "options": {
+            "cmd": "update",
+            "packageInstall": true
+          },
+          "configurations": {
+            "ios": {
+              "cmd": "update ios"
+            },
+            "android": {
+              "cmd": "update android"
+            }
           }
         }
       }
@@ -79,7 +164,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/my-home-library-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/my-home-library-e2e/**/*.{js,ts}"
+            ]
           }
         }
       }
@@ -90,12 +177,16 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/small-app/**/*.{ts,tsx,vue}"]
+            "lintFilePatterns": [
+              "libs/small-app/**/*.{ts,tsx,vue}"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/small-app"],
+          "outputs": [
+            "coverage/libs/small-app"
+          ],
           "options": {
             "jestConfig": "libs/small-app/jest.config.js",
             "passWithNoTests": true
@@ -111,7 +202,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/small-app-v2/**/*.{ts,tsx,vue}"]
+            "lintFilePatterns": [
+              "libs/small-app-v2/**/*.{ts,tsx,vue}"
+            ]
           }
         },
         "build": {
@@ -124,7 +217,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/small-app-v2"],
+          "outputs": [
+            "coverage/libs/small-app-v2"
+          ],
           "options": {
             "jestConfig": "libs/small-app-v2/jest.config.js",
             "passWithNoTests": true
@@ -140,7 +235,9 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/small-app-v3/**/*.{ts,tsx,vue}"]
+            "lintFilePatterns": [
+              "libs/small-app-v3/**/*.{ts,tsx,vue}"
+            ]
           }
         },
         "build": {
@@ -153,7 +250,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/small-app-v3"],
+          "outputs": [
+            "coverage/libs/small-app-v3"
+          ],
           "options": {
             "jestConfig": "libs/small-app-v3/jest.config.js",
             "passWithNoTests": true
@@ -175,7 +274,9 @@
             "outputPath": "dist/apps/elec-test",
             "main": "apps/elec-test/src/main.ts",
             "tsConfig": "apps/elec-test/tsconfig.app.json",
-            "assets": ["apps/elec-test/src/assets"]
+            "assets": [
+              "apps/elec-test/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -217,12 +318,16 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/elec-test/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/elec-test/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/elec-test"],
+          "outputs": [
+            "coverage/apps/elec-test"
+          ],
           "options": {
             "jestConfig": "apps/elec-test/jest.config.js",
             "passWithNoTests": true
@@ -237,12 +342,16 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/my-home-library-express",
             "main": "apps/my-home-library-express/src/main.ts",
             "tsConfig": "apps/my-home-library-express/tsconfig.app.json",
-            "assets": ["apps/my-home-library-express/src/assets"]
+            "assets": [
+              "apps/my-home-library-express/src/assets"
+            ]
           },
           "configurations": {
             "production": {
@@ -267,12 +376,16 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/my-home-library-express/**/*.ts"]
+            "lintFilePatterns": [
+              "apps/my-home-library-express/**/*.ts"
+            ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/my-home-library-express"],
+          "outputs": [
+            "coverage/apps/my-home-library-express"
+          ],
           "options": {
             "jestConfig": "apps/my-home-library-express/jest.config.js",
             "passWithNoTests": true
