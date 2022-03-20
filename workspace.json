@@ -45,16 +45,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/my-home-library/**/*.{ts,tsx,vue}"
-            ]
+            "lintFilePatterns": ["apps/my-home-library/**/*.{ts,tsx,vue}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/my-home-library"
-          ],
+          "outputs": ["coverage/apps/my-home-library"],
           "options": {
             "jestConfig": "apps/my-home-library/jest.config.js",
             "passWithNoTests": true
@@ -164,103 +160,10 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/my-home-library-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/my-home-library-e2e/**/*.{js,ts}"]
           }
         }
       }
-    },
-    "small-app": {
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/small-app/**/*.{ts,tsx,vue}"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/small-app"
-          ],
-          "options": {
-            "jestConfig": "libs/small-app/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "root": "libs/small-app",
-      "sourceRoot": "libs/small-app/src"
-    },
-    "small-app-v2": {
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/small-app-v2/**/*.{ts,tsx,vue}"
-            ]
-          }
-        },
-        "build": {
-          "executor": "@nx-plus/vue:library",
-          "options": {
-            "dest": "dist/libs/small-app-v2",
-            "entry": "libs/small-app-v2/src/index.ts",
-            "tsConfig": "libs/small-app-v2/tsconfig.lib.json"
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/small-app-v2"
-          ],
-          "options": {
-            "jestConfig": "libs/small-app-v2/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "root": "libs/small-app-v2",
-      "sourceRoot": "libs/small-app-v2/src"
-    },
-    "small-app-v3": {
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/small-app-v3/**/*.{ts,tsx,vue}"
-            ]
-          }
-        },
-        "build": {
-          "executor": "@nx-plus/vue:library",
-          "options": {
-            "dest": "dist/libs/small-app-v3",
-            "entry": "libs/small-app-v3/src/index.ts",
-            "tsConfig": "libs/small-app-v3/tsconfig.lib.json"
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/small-app-v3"
-          ],
-          "options": {
-            "jestConfig": "libs/small-app-v3/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "root": "libs/small-app-v3",
-      "sourceRoot": "libs/small-app-v3/src"
     },
     "elec-test": {
       "root": "apps/elec-test",
@@ -274,9 +177,7 @@
             "outputPath": "dist/apps/elec-test",
             "main": "apps/elec-test/src/main.ts",
             "tsConfig": "apps/elec-test/tsconfig.app.json",
-            "assets": [
-              "apps/elec-test/src/assets"
-            ]
+            "assets": ["apps/elec-test/src/assets"]
           },
           "configurations": {
             "production": {
@@ -318,16 +219,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/elec-test/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/elec-test/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/elec-test"
-          ],
+          "outputs": ["coverage/apps/elec-test"],
           "options": {
             "jestConfig": "apps/elec-test/jest.config.js",
             "passWithNoTests": true
@@ -342,16 +239,12 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/my-home-library-express",
             "main": "apps/my-home-library-express/src/main.ts",
             "tsConfig": "apps/my-home-library-express/tsconfig.app.json",
-            "assets": [
-              "apps/my-home-library-express/src/assets"
-            ]
+            "assets": ["apps/my-home-library-express/src/assets"]
           },
           "configurations": {
             "production": {
@@ -376,16 +269,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/my-home-library-express/**/*.ts"
-            ]
+            "lintFilePatterns": ["apps/my-home-library-express/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/my-home-library-express"
-          ],
+          "outputs": ["coverage/apps/my-home-library-express"],
           "options": {
             "jestConfig": "apps/my-home-library-express/jest.config.js",
             "passWithNoTests": true

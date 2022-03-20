@@ -33,15 +33,6 @@
       "tags": [],
       "implicitDependencies": ["my-home-library"]
     },
-    "small-app": {
-      "tags": []
-    },
-    "small-app-v2": {
-      "tags": []
-    },
-    "small-app-v3": {
-      "tags": []
-    },
     "elec-test": {
       "tags": []
     },
