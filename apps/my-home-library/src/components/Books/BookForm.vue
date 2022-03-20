@@ -1,21 +1,37 @@
 <template>
-  <v-container>
+  <v-container class='BookForm'>
     <v-row justify='center'>
       <v-col class='text-center mt-5'>
         <h2>{{ isEditMode ? 'Update Your Book' : 'Add Your New Book' }}</h2>
       </v-col>
     </v-row>
     <v-row justify='center'>
-      <v-col cols='12' md='4'>
-        <v-text-field label='Name'/>
-        <v-text-field label='Author'/>
-        <v-text-field label='Publisher'/>
-        <v-file-input label="Cover Image" append-icon='photo_camera' prepend-icon='' @change='onImageUploaded'/>
+
+      <v-col v-if='!changeImage && book && book.imageUrl' cols='12' md='4' class='text-center'>
+        <v-img class='BookForm--img mb-4 p-relative' :src='book.imageUrl'>
+          <div class='d-flex align-center justify-center p-absolute wh-100 BookForm--img-overlay'>
+            <v-btn elevation='2' @click='changeImage = true'>
+              Change Image
+            </v-btn>
+          </div>
+        </v-img>
+
+      </v-col>
+
+      <v-col v-if='imageSrc' cols='12' md='4'>
         <Cropper ref='cropper' :src='imageSrc' @change='onImageCrop' :stencil-props="{
           aspectRatio: 3/4,
         }"/>
+      </v-col>
+
+      <v-col cols='12' md='4'>
+        <v-text-field label='Name' v-model='name'/>
+        <v-text-field label='Author' v-model='author'/>
+        <v-text-field label='Publisher' v-model='publisher'/>
+        <v-file-input v-if='!book || !book.imageUrl || changeImage' v-model='image' label="Cover Image" append-icon='photo_camera' prepend-icon='' @change='onImageUploaded'/>
         <v-btn class='mt-5' :loading='submitLoading' width='100%' color='primary' @click='onSubmit'>Submit</v-btn>
       </v-col>
+
     </v-row>
   </v-container>
 </template>
@@ -36,11 +52,13 @@ export default class AddNewBookForm extends Vue {
   @Prop() readonly submitLoading!: boolean;
   @Prop() readonly book!: Book;
 
+  protected image = null;
   protected imageSrc = '';
   protected name = '';
   protected author = '';
   protected publisher = '';
   protected imageBlob: unknown = null;
+  protected changeImage = false;
 
   get isEditMode(): boolean {
     return !!this.book?.id;
@@ -57,25 +75,25 @@ export default class AddNewBookForm extends Vue {
   }
 
   protected onImageCrop({canvas}: {canvas: HTMLCanvasElement}): void {
-    canvas.toBlob((a: unknown) => {
+    canvas.toBlob((a) => {
+      const image = this.image as unknown as {name: string};
       this.imageBlob = a;
+      (this.imageBlob as {name: string}).name = image.name
     });
   }
 
-  protected onImageUploaded(file: Blob): void {
+  protected onImageUploaded(file: File): void {
     if (!file) {
       this.imageSrc = '';
       return;
     }
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = () => {
-      this.imageSrc = reader.result as string;
-    };
+    this.imageSrc = URL.createObjectURL(file);
   }
 
   protected onSubmit(): void {
+    console.log(this.image, this.imageBlob)
     let payload = {
+      ...(this.book && { bookID: this.book.id }),
       name: this.name,
       author: this.author,
       publisher: this.publisher,
@@ -86,3 +104,22 @@ export default class AddNewBookForm extends Vue {
   }
 }
 </script>
+
+<style lang='scss' scoped>
+.BookForm {
+  &--img {
+    &:hover {
+      .BookForm--img-overlay {
+        opacity: 1
+      }
+    }
+  }
+  &--img-overlay {
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: 0.3s opacity;
+    background-color: var(--overlay-light);
+  }
+}
+</style>

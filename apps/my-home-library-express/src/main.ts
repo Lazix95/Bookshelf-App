@@ -10,6 +10,7 @@ import mongoose from 'mongoose';
 
 // Import Routes
 import authRoutes from './routes/auth';
+import bookRoutes from './routes/books';
 
 // log only 4xx and 5xx responses to console
 app.use(morgan('dev', {
@@ -17,6 +18,7 @@ app.use(morgan('dev', {
 }))
 
 // parse application/json
+// app.use(bodyParser.urlencoded())
 app.use(bodyParser.json())
 
 //CORS Settings
@@ -36,6 +38,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Routes
 app.use('/api', authRoutes);
+app.use('/api', bookRoutes);
 
 // Error handling middleware
 // Every next(error) will end up here

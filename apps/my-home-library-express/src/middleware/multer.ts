@@ -1,12 +1,13 @@
 import multer from 'multer';
 import { v4 } from 'uuid'
+import mime from 'mime-types'
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'images');
   },
   filename: (req, file, cb) => {
-    cb(null, v4() + '-' + file.originalname);
+    cb(null, v4() + '.' + mime.extension(file.mimetype));
   }
 });
 
@@ -22,5 +23,5 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-export default multer({storage: fileStorage, fileFilter: fileFilter}).single('image');
+export default multer({storage: fileStorage, fileFilter: fileFilter}).single('imageBlob');
 

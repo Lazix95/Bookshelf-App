@@ -1,10 +1,13 @@
 <template>
  <router-view :submit-loading='submitLoading'
               :initLoading='initLoading'
+              :deleteLoading='deleteLoading'
               :books='books'
               :book='book'
               @fetchBooks='fetchBooks'
               @onSubmitBookForm='handleSubmitBookForm'
+              @deleteBook='handleDeleteBook'
+              @goToBook='goToBook'
  />
 </template>
 
@@ -23,20 +26,22 @@ import Vue from 'vue';
 export default class Books extends NavigationMixin {
   protected submitLoading = false;
   protected initLoading = false;
+  protected deleteLoading = false;
+
   protected book: Book | null = null;
 
   get books(): Book[] {
     return this.$store.getters['books/books'];
   }
 
-  get bookID(): number {
-    return +this.$route.params.bookID;
+  get bookID(): string {
+    return this.$route.params.bookID;
   }
 
   @Watch('bookID', {
     immediate: true,
   })
-  protected onBookIDChanged(bookID: number) {
+  protected onBookIDChanged(bookID: string) {
     this.getBook(bookID);
   }
 
@@ -48,12 +53,28 @@ export default class Books extends NavigationMixin {
       this.initLoading = false;
     }).catch(() => {
       Vue.$toast.error('Something went wrong, please try again later');
+      this.initLoading = false;
       this.goToHome();
     })
   }
 
   protected handleSubmitBookForm(payload: BookApiPayload): void {
-    this.$store.dispatch('books/storeBook', payload);
+    this.submitLoading = true;
+    this.$store.dispatch(payload.bookID ? 'books/updateBook' : 'books/storeBook', payload).then(() => {
+      this.submitLoading = false;
+      this.goToHome();
+    }).catch(() => {
+      this.submitLoading = false;
+    })
+  }
+
+  protected handleDeleteBook(bookID: string): void {
+    this.deleteLoading = true;
+    this.$store.dispatch('books/deleteBook', {bookID}).then(() => {
+      this.deleteLoading = false;
+    }).then(() => {
+      this.deleteLoading = false;
+    })
   }
 
   protected fetchBooks(): void {

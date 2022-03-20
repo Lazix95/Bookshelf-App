@@ -7,4 +7,9 @@ export class NavigationMixin extends Vue {
   goToHome(): void {
     this.$router.push({name: 'Books'});
   }
+
+  goToBook(bookID: string): void {
+    console.log('awdawd')
+    this.$router.push({name: 'Books.edit', params: { bookID }});
+  }
 }

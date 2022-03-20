@@ -21,5 +21,18 @@ export const authActions = <ActionTree<BooksState, unknown>>{
       commit('storeBook', res.data.book);
       return res.data.book;
     })
-  }
+  },
+
+  updateBook({commit}, payload: BookApiPayload) {
+    return booksApi.updateBook(payload).then(res => {
+      commit('updateBook', res.data.book);
+      return res.data.book;
+    })
+  },
+
+  deleteBook({commit}, payload: { bookID: number }) {
+    return booksApi.deleteBook(payload.bookID).then(() => {
+      commit('deleteBook', payload.bookID);
+    })
+  },
 }

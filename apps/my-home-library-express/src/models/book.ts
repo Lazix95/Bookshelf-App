@@ -5,6 +5,8 @@ export interface BookType {
   name: string,
   imageUrl: string,
   author: AuthorType[] | number[],
+  publisher: string,
+  storageRef: string
 }
 
 const bookSchema = new Schema({
@@ -13,13 +15,33 @@ const bookSchema = new Schema({
     required: true,
     trim: true,
   },
+  author: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  publisher: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  storageRef: {
+    type: String,
+    required: function () {
+      return !!this.imageUrl;
+    },
+  },
   imageUrl: {
     type: String,
   },
-  author: {
-    type: Schema.Types.ObjectId,
-    ref: 'Author'
-  }
 })
+
+bookSchema.method('toJSON', function() {
+  const book = this.toObject();
+  book.id = book._id;
+  delete book._id;
+  delete book.__v;
+  return book;
+});
 
 export const Book = model<BookType>('Book', bookSchema);

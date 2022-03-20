@@ -3,7 +3,7 @@ export interface Book {
   readonly name: string,
   readonly author: string,
   readonly publisher: string,
-  readonly src: string,
+  readonly imageUrl: string,
 }
 
 export interface BooksState {
