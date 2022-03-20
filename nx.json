@@ -13,7 +13,7 @@
   "affected": {
     "defaultBase": "master"
   },
-  "npmScope": "lazix-nx-monorepo",
+  "npmScope": "bookshelf-app",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/nx-cloud",
