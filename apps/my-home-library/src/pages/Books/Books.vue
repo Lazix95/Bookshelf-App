@@ -1,5 +1,6 @@
 <template>
- <router-view :submit-loading='submitLoading'
+ <router-view :key='$route.fullPath'
+              :submit-loading='submitLoading'
               :initLoading='initLoading'
               :deleteLoading='deleteLoading'
               :books='books'
@@ -15,7 +16,7 @@
 import { Component, Watch } from 'vue-property-decorator';
 import MainView from '../../views/MainView/MainView.vue';
 import BookList from '../../components/Books/BookList.vue';
-import { Book } from '../../store/modules/books/models';
+import type { Book } from '../../store/modules/books/models';
 import { BookApiPayload } from '../../api/books';
 import { NavigationMixin } from '../../mixins/NavigationMixin';
 import Vue from 'vue';
@@ -46,7 +47,10 @@ export default class Books extends NavigationMixin {
   }
 
   protected getBook(bookID = this.bookID): void {
-    if (!bookID) return;
+    if (!bookID) {
+      this.book = null;
+      return;
+    }
     this.initLoading = true;
     this.$store.dispatch('books/getOneBook', { bookID }).then(book => {
       this.book = book;

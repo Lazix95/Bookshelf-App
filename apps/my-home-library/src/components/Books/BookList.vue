@@ -1,6 +1,6 @@
 <template>
 <v-container>
-  <v-row>
+  <v-row justify='center'>
    <template v-for='book in books'>
      <BookListItem :key='book.id'
                    :name='book.name'
@@ -18,7 +18,7 @@
 <script lang='ts'>
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import BookListItem from './BookListItem.vue';
-import { Book } from '../../store/modules/books/models';
+import type { Book } from '../../store/modules/books/models';
 import WidgetConfirmDeleteDialog, { WidgetConfirmDeleteDialogRef } from '../widgets/WidgetConfirmDeleteDialog.vue';
 @Component({
   inheritAttrs: false,

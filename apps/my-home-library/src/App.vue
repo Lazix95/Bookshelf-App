@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <!-- If route is PUBLIC and user is not logged in, view cannot be "MainView" -->
     <component :is="view" v-if='(isLoggedIn || isPublicRoute) && !isAutoLoginLoading'>
       <router-view/>
     </component>
@@ -13,9 +14,10 @@ import { Component, Vue } from 'vue-property-decorator';
 import Login from './pages/Login/Login.vue';
 import MainView from './views/MainView/MainView.vue';
 import Spinner from './components/Spinner.vue';
+import EmptyView from './views/EmptyView/EmptyView.vue';
 
 @Component({
-  components: { Spinner, MainView, Login }
+  components: { EmptyView, Spinner, MainView, Login }
 })
 export default class App extends Vue {
   protected isAutoLoginLoading = true;
@@ -29,7 +31,7 @@ export default class App extends Vue {
   }
 
   get view(): string {
-    const registeredViews = ['MainView']
+    const registeredViews = ['MainView', 'EmptyView']
     const view = this.$route.meta.view;
     const defaultView = registeredViews[0]
     if (!view) return defaultView;

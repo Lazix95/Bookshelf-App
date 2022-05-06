@@ -6,7 +6,7 @@
           <p class='subtitle'>Please enter your email and password</p>
           <v-divider class='pb-5 mt-3'></v-divider>
           <v-text-field dense v-model='email' outlined label='E-mail'/>
-          <v-text-field type='password' dense hide-details v-model='password' outlined label='Password'/>
+          <v-text-field type='password' dense hide-details v-model='password' outlined label='Password' @keyup.enter='onLogin'/>
           <v-checkbox label='Remember Me' hide-details v-model='rememberMe'/>
           <v-subheader light class='black--text'> You dont have an account, <router-link class='ml-1' :to='{ name: "register" }'>Register Here!</router-link> </v-subheader>
           <v-btn :loading='submitLoading' width='100%' color='primary' @click='onLogin'>Login</v-btn>

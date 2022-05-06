@@ -43,7 +43,6 @@ app.use('/api', bookRoutes);
 // Error handling middleware
 // Every next(error) will end up here
 app.use((error, req, res, next) => {
-  console.log(error.validationMessages);
   const status = error.status || 500;
   const message = error.message;
   const validationMessages = error.validationMessages;

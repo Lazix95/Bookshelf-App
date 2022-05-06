@@ -8,7 +8,7 @@ export const getBooks = async (req, res, next) => {
    const page = req.query.page;
    const limit = req.query.limit;
    const skip = page * limit;
-   const books = await Book.find({}, null, {skip, limit,});
+   const books = await Book.find({user: req.user._id}, null, {skip, limit,});
    res.status(200).json({ books })
  } catch (err) {
    if (err.status) err.status = 500
@@ -26,7 +26,7 @@ export const getBookToReq = async (req, res, next) => {
     return
   }
 
-  const book = await Book.findById(bookID);
+  const book = await Book.findOne({_id: bookID, user: req.user._id});
 
   if (!book) {
     const error = new Err('Book Not Found!');
@@ -56,8 +56,9 @@ export const postBook = async (req, res, next) => {
     const {name, author, publisher, } = req.body;
     const imageUrl = req?.file?.mediaLink;
     const storageRef = req?.file?.storageRef;
+    const user = req.user._id;
 
-    const book = new Book({ name, author, publisher, imageUrl, storageRef});
+    const book = new Book({ name, author, publisher, imageUrl, storageRef, user });
     await book.save();
 
     res.status(201).json({book});
@@ -70,6 +71,7 @@ export const postBook = async (req, res, next) => {
 export const putBook = async (req, res, next) => {
   try {
     const body = req.body;
+    const deleteCover = req.body.deleteCover;
     const bookID = req.params.bookID;
     const imageUrl = req?.file?.mediaLink;
     const storageRef = req?.file?.storageRef;
@@ -81,13 +83,22 @@ export const putBook = async (req, res, next) => {
       return
     }
 
-    const book = await Book.findOneAndUpdate({_id: bookID}, {
-      ...(hasKey(body, 'name') && {name: body.name}),
-      ...(hasKey(body, 'author') && {author: body.author}),
-      ...(hasKey(body, 'publisher') && {publisher: body.publisher}),
+    const updatePayload = {
+      ...(hasKey(body, 'name') && { name: body.name }),
+      ...(hasKey(body, 'author') && { author: body.author }),
+      ...(hasKey(body, 'publisher') && { publisher: body.publisher }),
+      ...(deleteCover && { imageUrl: "", storageRef: "" }),
       ...(imageUrl && { imageUrl }),
       ...(storageRef && { storageRef }),
-    }, {new: true});
+    }
+
+    const currentBook = await Book.findById(bookID);
+
+    if (deleteCover && currentBook && currentBook.imageUrl || storageRef && currentBook && currentBook.storageRef) {
+      await deleteStorageFile(currentBook.storageRef)
+    }
+
+    const book = await Book.findOneAndUpdate({_id: bookID}, updatePayload, {new: true});
 
     res.status(200).json({ book })
   } catch (err) {
@@ -99,7 +110,7 @@ export const putBook = async (req, res, next) => {
 export const deleteBook = async (req, res, next) => {
   try {
     const book = req.book;
-    await deleteStorageFile(book.storageRef);
+    if (book.storageRef) await deleteStorageFile(book.storageRef);
     await book.delete();
 
     res.status(200).json({status: 'OK'});
@@ -108,3 +119,5 @@ export const deleteBook = async (req, res, next) => {
     next(err)
   }
 }
+
+

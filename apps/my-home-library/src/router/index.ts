@@ -11,6 +11,7 @@ const routes: Array<RouteConfig> = [
     component: () => import('./../pages/Register/Register.vue'),
 
     meta: {
+      view: 'EmptyView',
       publicRoute: true,
     }
   },

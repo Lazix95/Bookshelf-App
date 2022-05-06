@@ -12,27 +12,32 @@ export interface BookType {
 const bookSchema = new Schema({
   name: {
     type: String,
-    required: true,
     trim: true,
+    required: true,
   },
   author: {
     type: String,
-    required: true,
     trim: true,
+    required: true,
   },
   publisher: {
     type: String,
-    required: true,
     trim: true,
+    required: true,
+  },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  imageUrl: {
+    type: String,
   },
   storageRef: {
     type: String,
     required: function () {
       return !!this.imageUrl;
     },
-  },
-  imageUrl: {
-    type: String,
   },
 })
 

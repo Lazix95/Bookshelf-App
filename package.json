@@ -10,12 +10,10 @@
     "start:library-express": "env-cmd -f ./apps/my-home-library-express/env/.env.dev nx serve my-home-library-express",
     "start:library-express:prod": "env-cmd -f ./apps/my-home-library-express/env/.env.prod nx serve my-home-library-express",
     "serve-library:dev": "concurrently \"yarn start:library\" \"yarn start:library-express\"",
-
     "build:library": "env-cmd -f apps/my-home-library/env/.env.dev nx build my-home-library",
     "build:library:prod": "env-cmd -f ./apps/my-home-library/env/.env.prod nx build my-home-library",
     "build:library-express": "env-cmd -f ./apps/my-home-library-express/env/.env.dev nx build my-home-library-express",
     "build:library-express:prod": "env-cmd -f ./apps/my-home-library-express/env/.env.prod nx build my-home-library-express",
-
     "build": "nx build",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
@@ -114,3 +112,4 @@
     "vue-template-compiler": "^2.6.11"
   }
 }
+

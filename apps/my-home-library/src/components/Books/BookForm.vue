@@ -10,8 +10,8 @@
       <v-col v-if='!changeImage && book && book.imageUrl' cols='12' md='4' class='text-center'>
         <v-img class='BookForm--img mb-4 p-relative' :src='book.imageUrl'>
           <div class='d-flex align-center justify-center p-absolute wh-100 BookForm--img-overlay'>
-            <v-btn elevation='2' @click='changeImage = true'>
-              Change Image
+            <v-btn color='red' elevation='2' @click='changeImage = true'>
+              Change/Delete Image
             </v-btn>
           </div>
         </v-img>
@@ -40,7 +40,7 @@
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import { Cropper } from 'vue-advanced-cropper';
 import 'vue-advanced-cropper/dist/style.css';
-import { Book } from '../../store/modules/books/models';
+import type { Book } from '../../store/modules/books/models';
 
 @Component({
   inheritAttrs: false,
@@ -97,6 +97,7 @@ export default class AddNewBookForm extends Vue {
       name: this.name,
       author: this.author,
       publisher: this.publisher,
+      ...(this.changeImage && this.book?.imageUrl && !this.imageBlob && {deleteCover: true}),
       ...(this.imageBlob && {imageBlob: this.imageBlob}),
     }
 

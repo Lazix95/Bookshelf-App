@@ -9,3 +9,4 @@ export interface Book {
 export interface BooksState {
   books: Book[];
 }
+
