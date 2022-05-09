@@ -5,10 +5,10 @@ import { deleteStorageFile } from '../middleware/firebaseStorage';
 
 export const getBooks = async (req, res, next) => {
  try {
-   const page = req.query.page;
-   const limit = req.query.limit;
-   const skip = page * limit;
-   const books = await Book.find({user: req.user._id}, null, {skip, limit,});
+   //const page = req.query.page;
+   //const limit = req.query.limit;
+   //const skip = page * limit;
+   const books = await Book.find({user: req.user._id}, null)
    res.status(200).json({ books })
  } catch (err) {
    if (err.status) err.status = 500

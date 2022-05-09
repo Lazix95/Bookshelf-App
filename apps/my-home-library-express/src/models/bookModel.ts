@@ -1,10 +1,10 @@
 import { Schema, model } from 'mongoose';
-import { AuthorType } from './author';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 export interface BookType {
   name: string,
   imageUrl: string,
-  author: AuthorType[] | number[],
+  author: string,
   publisher: string,
   storageRef: string
 }
@@ -40,6 +40,9 @@ const bookSchema = new Schema({
     },
   },
 })
+
+bookSchema.plugin(mongoosePaginate);
+
 
 bookSchema.method('toJSON', function() {
   const book = this.toObject();
