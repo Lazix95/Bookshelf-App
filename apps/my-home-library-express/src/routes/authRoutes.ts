@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import { login, register, me } from '../controllers/auth';
+import { login, register, me } from '../controllers/authController';
 import isAuth from '../middleware/isAuth';
 
 // Validations

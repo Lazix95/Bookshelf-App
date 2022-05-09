@@ -55,8 +55,8 @@ export default class Books extends NavigationMixin {
     this.$store.dispatch('books/getOneBook', { bookID }).then(book => {
       this.book = book;
       this.initLoading = false;
-    }).catch(() => {
-      Vue.$toast.error('Something went wrong, please try again later');
+    }).catch((err) => {
+      if(err.response.status !== 422) Vue.$toast.error('Something went wrong, please try again later');
       this.initLoading = false;
       this.goToHome();
     })

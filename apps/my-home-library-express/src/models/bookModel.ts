@@ -30,6 +30,10 @@ const bookSchema = new Schema({
     ref: 'User',
     required: true,
   },
+  collectionSet: {
+    type: Schema.Types.ObjectId,
+    ref: 'Collection'
+  },
   imageUrl: {
     type: String,
   },

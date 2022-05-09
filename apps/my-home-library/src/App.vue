@@ -5,7 +5,7 @@
       <router-view/>
     </component>
     <Login v-else-if='!isAutoLoginLoading'/>
-    <Spinner v-else/>
+    <WidgetSpinner v-else/>
   </v-app>
 </template>
 
@@ -13,11 +13,11 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Login from './pages/Login/Login.vue';
 import MainView from './views/MainView/MainView.vue';
-import Spinner from './components/Spinner.vue';
+import WidgetSpinner from './components/widgets/WidgetSpinner.vue';
 import EmptyView from './views/EmptyView/EmptyView.vue';
 
 @Component({
-  components: { EmptyView, Spinner, MainView, Login }
+  components: { EmptyView, WidgetSpinner, MainView, Login }
 })
 export default class App extends Vue {
   protected isAutoLoginLoading = true;

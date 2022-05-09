@@ -9,8 +9,8 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 
 // Import Routes
-import authRoutes from './routes/auth';
-import bookRoutes from './routes/books';
+import authRoutes from './routes/authRoutes';
+import bookRoutes from './routes/booksRoutes';
 
 // log only 4xx and 5xx responses to console
 app.use(morgan('dev', {

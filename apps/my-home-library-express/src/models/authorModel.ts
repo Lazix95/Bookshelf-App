@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import { BookType } from './book';
+import { BookType } from './bookModel';
 
 export interface AuthorType {
   name: string,

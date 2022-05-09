@@ -1,39 +1,39 @@
 <template>
-  <v-container class='BookForm'>
-    <v-row justify='center'>
-      <v-col class='text-center mt-5'>
-        <h2>{{ isEditMode ? 'Update Your Book' : 'Add Your New Book' }}</h2>
-      </v-col>
-    </v-row>
+  <BasePageContent :loading="initLoading" class='BookForm' :title="isEditMode ? 'Update Your Book' : 'Add Your New Book'">
     <v-row justify='center'>
 
-      <v-col v-if='!changeImage && book && book.imageUrl' cols='12' md='4' class='text-center'>
-        <v-img class='BookForm--img mb-4 p-relative' :src='book.imageUrl'>
-          <div class='d-flex align-center justify-center p-absolute wh-100 BookForm--img-overlay'>
-            <v-btn color='red' elevation='2' @click='changeImage = true'>
-              Change/Delete Image
-            </v-btn>
-          </div>
-        </v-img>
+        <v-col v-if='!changeImage && book && book.imageUrl' cols='auto' md='auto' class='text-center u-border-all pa-3'>
+          <v-img style='width: 255px' class='BookForm--img p-relative' :src='book.imageUrl'>
+<!--            <div class='d-flex align-center justify-center p-absolute wh-100 BookForm&#45;&#45;img-overlay'>-->
+<!--              <v-btn color='red' elevation='2' @click='changeImage = true'>-->
+<!--                Change/Delete-->
+<!--                <br/>-->
+<!--                Image-->
+<!--              </v-btn>-->
+<!--            </div>-->
+          </v-img>
 
-      </v-col>
+          <v-btn class='mt-3' color='primary' elevation='2' icon @click='changeImage = true'>
+            <v-icon medium>delete</v-icon>
+          </v-btn>
+        </v-col>
 
-      <v-col v-if='imageSrc' cols='12' md='4'>
-        <Cropper ref='cropper' :src='imageSrc' @change='onImageCrop' :stencil-props="{
+        <v-col v-if='imageSrc' cols='12' md='4'>
+          <Cropper ref='cropper' :src='imageSrc' @change='onImageCrop' :stencil-props="{
           aspectRatio: 3/4,
         }"/>
-      </v-col>
+        </v-col>
 
-      <v-col cols='12' md='4'>
-        <v-text-field label='Name' v-model='name'/>
-        <v-text-field label='Author' v-model='author'/>
-        <v-text-field label='Publisher' v-model='publisher'/>
-        <v-file-input v-if='!book || !book.imageUrl || changeImage' v-model='image' label="Cover Image" append-icon='photo_camera' prepend-icon='' @change='onImageUploaded'/>
-        <v-btn class='mt-5' :loading='submitLoading' width='100%' color='primary' @click='onSubmit'>Submit</v-btn>
-      </v-col>
+        <v-col cols='12' md='4'>
+          <v-text-field label='Name' v-model='name'/>
+          <v-text-field label='Author' v-model='author'/>
+          <v-text-field label='Publisher' v-model='publisher'/>
+          <v-file-input v-if='!book || !book.imageUrl || changeImage' v-model='image' label="Cover Image" append-icon='photo_camera' prepend-icon='' @change='onImageUploaded'/>
+          <v-btn class='mt-5' :loading='submitLoading' width='100%' color='primary' @click='onSubmit'>Submit</v-btn>
+        </v-col>
 
-    </v-row>
-  </v-container>
+      </v-row>
+  </BasePageContent>
 </template>
 
 <script lang='ts'>
@@ -41,15 +41,18 @@ import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 import { Cropper } from 'vue-advanced-cropper';
 import 'vue-advanced-cropper/dist/style.css';
 import type { Book } from '../../store/modules/books/models';
+import BasePageContent from '../base/BasePageContent.vue';
 
 @Component({
   inheritAttrs: false,
   components: {
+    BasePageContent,
     Cropper
   }
 })
 export default class AddNewBookForm extends Vue {
   @Prop() readonly submitLoading!: boolean;
+  @Prop() readonly initLoading!: boolean;
   @Prop() readonly book!: Book;
 
   protected image = null;
