@@ -29,7 +29,7 @@ import type { Book } from '../../store/modules/books/models';
 import WidgetConfirmDeleteDialog, {
   WidgetConfirmDeleteDialogRef,
 } from '../widgets/WidgetConfirmDeleteDialog.vue';
-import BasePageContent from '../base/BasePageContent.vue';
+import BasePageContent from '../Base/BasePageContent.vue';
 @Component({
   inheritAttrs: false,
   components: { BasePageContent, WidgetConfirmDeleteDialog, BookListItem },

@@ -1,6 +1,5 @@
 import Err from '../types/Err';
-
-import jwt from 'jsonwebtoken';
+import { decodeToken } from '../utils/token';
 
 export default (req, res, next) => {
   try {
@@ -12,7 +11,7 @@ export default (req, res, next) => {
     }
     const token = req.get('Authorization').split(' ')[1];
 
-    const decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+    const decodedToken = decodeToken(token);
 
     if (!decodedToken || (decodedToken && decodedToken.invitation)) {
       const error = new Err('Not authenticated.');

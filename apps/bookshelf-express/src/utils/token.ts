@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import Err from '../types/Err';
 
 interface CreateTokenArgs {
@@ -35,3 +35,7 @@ export const refreshToken = ({ token }: RefreshTokenArgs) => {
   delete payload.exp;
   return createToken({ payload });
 };
+
+export const decodeToken = (token: string, secret = process.env.TOKEN_SECRET): JwtPayload => {
+  return jwt.verify(token, secret) as JwtPayload;
+}

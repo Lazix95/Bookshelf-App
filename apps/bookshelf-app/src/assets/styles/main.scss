@@ -2,3 +2,7 @@
 @import 'customVuetifyStyles';
 @import 'utility';
 @import 'variables';
+
+body {
+  font-family: var(--systemFontStack) !important;
+}

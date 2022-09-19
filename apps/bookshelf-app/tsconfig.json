@@ -9,6 +9,9 @@
   },
   "include": [],
   "files": [],
+  "paths": {
+    "@Components": ["src/components/*"]
+  },
   "references": [
     {
       "path": "./tsconfig.app.json"

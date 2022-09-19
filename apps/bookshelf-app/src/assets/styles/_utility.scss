@@ -1,16 +1,66 @@
 .p-relative {
-  position: relative;
+  position: relative !important;
 }
 
 .p-absolute {
-  position: absolute;
+  position: absolute !important;
 }
 
 .wh-100 {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .u-border-all {
-  border: 1px solid #cccccc;
+  border: 1px solid #cccccc !important;
 }
+
+.u-font-10 {
+  font-size: 10px !important;
+}
+
+.u-font-12 {
+  font-size: 12px !important;
+}
+
+.u-font-14 {
+  font-size: 14px !important;
+}
+
+.u-font-16 {
+  font-size: 16px !important;
+}
+
+.u-font-18 {
+  font-size: 18px !important;
+}
+
+.u-font-bold {
+  font-weight: bold !important;
+}
+
+.u-font-semi-bold {
+  font-weight: 600 !important;
+}
+
+.u-font-normal {
+  font-weight: normal !important;
+}
+
+.u-grayscale-100 {
+  color: var(--grayscale-100) !important;
+}
+
+.u-grayscale-80 {
+  color: var(--grayscale-80) !important;
+}
+
+.u-grayscale-80 {
+  color: var(--grayscale-60) !important;
+}
+
+.u-grayscale-60 {
+  color: var(--grayscale-60) !important;
+}
+
+

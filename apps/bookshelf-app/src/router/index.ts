@@ -36,6 +36,14 @@ const routes: Array<RouteConfig> = [
         },
       },
       {
+        path: '/book/:bookID/details',
+        name: 'Books.details',
+        component: () => import('../components/Books/BookDetails.vue'),
+        meta: {
+          title: 'Update Book',
+        },
+      },
+      {
         path: 'add-new-book',
         name: 'Books.add',
         component: () => import('../components/Books/BookForm.vue'),
