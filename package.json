@@ -7,7 +7,8 @@
     "start:bookshelf": "env-cmd -f apps/bookshelf-app/env/.env.dev nx serve bookshelf-app",
     "build:bookshelf": "env-cmd -f apps/bookshelf-app/env/.env.dev nx build bookshelf-app",
     "start:bookshelf:prod": "env-cmd -f ./apps/bookshelf-app/env/.env.prod nx serve bookshelf-app",
-    "build:bookshelf:prod": "env-cmd -f ./apps/bookshelf-app/env/.env.prod nx build bookshelf-app", 
+    
+    "build:bookshelf:prod": "env-cmd -f ./apps/bookshelf-app/env/.env.prod nx build bookshelf-app",
 
     "start:bookshelf-express": "env-cmd -f ./apps/bookshelf-express/env/.env.dev nx serve bookshelf-express",
     "build:bookshelf-express": "env-cmd -f ./apps/bookshelf-express/env/.env.dev nx build bookshelf-express",
