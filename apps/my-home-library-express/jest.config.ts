@@ -1,4 +1,5 @@
-module.exports = {
+/* eslint-disable */
+export default {
   displayName: 'my-home-library-express',
   preset: '../../jest.preset.js',
   globals: {
@@ -11,4 +12,5 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: '../../coverage/apps/my-home-library-express',
+  testEnvironment: 'node',
 };

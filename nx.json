@@ -18,23 +18,30 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
         "accessToken": "ZmRlOWIxZTgtZDVjOC00YWVlLWIzZDItNzg4YWM1MzdlZDQwfHJlYWQtd3JpdGU=",
         "canTrackAnalytics": false,
-        "showUsageWarnings": true
+        "showUsageWarnings": true,
+        "parallel": 1
       }
     }
   },
-  "projects": {
-    "my-home-library": {
-      "tags": []
-    },
-    "my-home-library-e2e": {
-      "tags": [],
-      "implicitDependencies": ["my-home-library"]
-    },
-    "my-home-library-express": {
-      "tags": []
-    }
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "defaultProject": "my-home-library-express",
+  "cli": {
+    "defaultCollection": "@nrwl/express"
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
   }
 }

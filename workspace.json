@@ -1,9 +1,5 @@
 {
   "version": 2,
-  "cli": {
-    "defaultCollection": "@nrwl/express"
-  },
-  "defaultProject": "my-home-library-express",
   "projects": {
     "my-home-library": {
       "projectType": "application",
@@ -46,13 +42,14 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/my-home-library/**/*.{ts,tsx,vue}"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/apps/my-home-library"],
           "options": {
-            "jestConfig": "apps/my-home-library/jest.config.js",
+            "jestConfig": "apps/my-home-library/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -137,7 +134,8 @@
             }
           }
         }
-      }
+      },
+      "tags": []
     },
     "my-home-library-e2e": {
       "root": "apps/my-home-library-e2e",
@@ -161,9 +159,12 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/my-home-library-e2e/**/*.{js,ts}"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         }
-      }
+      },
+      "tags": [],
+      "implicitDependencies": ["my-home-library"]
     },
     "my-home-library-express": {
       "root": "apps/my-home-library-express",
@@ -171,7 +172,7 @@
       "projectType": "application",
       "targets": {
         "build": {
-          "executor": "@nrwl/node:build",
+          "executor": "@nrwl/node:webpack",
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/my-home-library-express",
@@ -194,7 +195,7 @@
           }
         },
         "serve": {
-          "executor": "@nrwl/node:execute",
+          "executor": "@nrwl/node:node",
           "options": {
             "buildTarget": "my-home-library-express:build"
           }
@@ -203,17 +204,20 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": ["apps/my-home-library-express/**/*.ts"]
-          }
+          },
+          "outputs": ["{options.outputFile}"]
         },
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/apps/my-home-library-express"],
           "options": {
-            "jestConfig": "apps/my-home-library-express/jest.config.js",
+            "jestConfig": "apps/my-home-library-express/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": []
     }
-  }
+  },
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }

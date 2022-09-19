@@ -1,4 +1,5 @@
-module.exports = {
+/* eslint-disable */
+export default {
   displayName: 'my-home-library',
   preset: '../../jest.preset.js',
   transform: {
