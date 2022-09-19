@@ -33,9 +33,6 @@
       "tags": [],
       "implicitDependencies": ["my-home-library"]
     },
-    "elec-test": {
-      "tags": []
-    },
     "my-home-library-express": {
       "tags": []
     }
