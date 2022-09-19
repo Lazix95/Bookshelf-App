@@ -1,19 +1,19 @@
 {
   "version": 2,
   "projects": {
-    "my-home-library": {
+    "bookshelf-app": {
       "projectType": "application",
-      "root": "apps/my-home-library",
-      "sourceRoot": "apps/my-home-library/src",
+      "root": "apps/bookshelf-app",
+      "sourceRoot": "apps/bookshelf-app/src",
       "targets": {
         "build": {
           "executor": "@nx-plus/vue:browser",
           "options": {
             "publicPath": "./",
-            "dest": "dist/apps/my-home-library",
-            "index": "apps/my-home-library/public/index.html",
-            "main": "apps/my-home-library/src/main.ts",
-            "tsConfig": "apps/my-home-library/tsconfig.app.json"
+            "dest": "dist/apps/bookshelf-app",
+            "index": "apps/bookshelf-app/public/index.html",
+            "main": "apps/bookshelf-app/src/main.ts",
+            "tsConfig": "apps/bookshelf-app/tsconfig.app.json"
           },
           "configurations": {
             "production": {
@@ -30,26 +30,26 @@
         "serve": {
           "executor": "@nx-plus/vue:dev-server",
           "options": {
-            "browserTarget": "my-home-library:build"
+            "browserTarget": "bookshelf-app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "my-home-library:build:production"
+              "browserTarget": "bookshelf-app:build:production"
             }
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/my-home-library/**/*.{ts,tsx,vue}"]
+            "lintFilePatterns": ["apps/bookshelf-app/**/*.{ts,tsx,vue}"]
           },
           "outputs": ["{options.outputFile}"]
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/my-home-library"],
+          "outputs": ["coverage/apps/bookshelf-app"],
           "options": {
-            "jestConfig": "apps/my-home-library/jest.config.ts",
+            "jestConfig": "apps/bookshelf-app/jest.config.ts",
             "passWithNoTests": true
           }
         },
@@ -137,48 +137,48 @@
       },
       "tags": []
     },
-    "my-home-library-e2e": {
-      "root": "apps/my-home-library-e2e",
-      "sourceRoot": "apps/my-home-library-e2e/src",
+    "bookshelf-app-e2e": {
+      "root": "apps/bookshelf-app-e2e",
+      "sourceRoot": "apps/bookshelf-app-e2e/src",
       "projectType": "application",
       "targets": {
         "e2e": {
           "executor": "@nrwl/cypress:cypress",
           "options": {
-            "cypressConfig": "apps/my-home-library-e2e/cypress.json",
-            "tsConfig": "apps/my-home-library-e2e/tsconfig.e2e.json",
-            "devServerTarget": "my-home-library:serve"
+            "cypressConfig": "apps/bookshelf-app-e2e/cypress.json",
+            "tsConfig": "apps/bookshelf-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "bookshelf-app:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "my-home-library:serve:production"
+              "devServerTarget": "bookshelf-app:serve:production"
             }
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/my-home-library-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": ["apps/bookshelf-app-e2e/**/*.{js,ts}"]
           },
           "outputs": ["{options.outputFile}"]
         }
       },
       "tags": [],
-      "implicitDependencies": ["my-home-library"]
+      "implicitDependencies": ["bookshelf-app"]
     },
-    "my-home-library-express": {
-      "root": "apps/my-home-library-express",
-      "sourceRoot": "apps/my-home-library-express/src",
+    "bookshelf-express": {
+      "root": "apps/bookshelf-express",
+      "sourceRoot": "apps/bookshelf-express/src",
       "projectType": "application",
       "targets": {
         "build": {
           "executor": "@nrwl/node:webpack",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/apps/my-home-library-express",
-            "main": "apps/my-home-library-express/src/main.ts",
-            "tsConfig": "apps/my-home-library-express/tsconfig.app.json",
-            "assets": ["apps/my-home-library-express/src/assets"]
+            "outputPath": "dist/apps/bookshelf-express",
+            "main": "apps/bookshelf-express/src/main.ts",
+            "tsConfig": "apps/bookshelf-express/tsconfig.app.json",
+            "assets": ["apps/bookshelf-express/src/assets"]
           },
           "configurations": {
             "production": {
@@ -187,8 +187,8 @@
               "inspect": false,
               "fileReplacements": [
                 {
-                  "replace": "apps/my-home-library-express/src/environments/environment.ts",
-                  "with": "apps/my-home-library-express/src/environments/environment.prod.ts"
+                  "replace": "apps/bookshelf-express/src/environments/environment.ts",
+                  "with": "apps/bookshelf-express/src/environments/environment.prod.ts"
                 }
               ]
             }
@@ -197,21 +197,21 @@
         "serve": {
           "executor": "@nrwl/node:node",
           "options": {
-            "buildTarget": "my-home-library-express:build"
+            "buildTarget": "bookshelf-express:build"
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/my-home-library-express/**/*.ts"]
+            "lintFilePatterns": ["apps/bookshelf-express/**/*.ts"]
           },
           "outputs": ["{options.outputFile}"]
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/my-home-library-express"],
+          "outputs": ["coverage/apps/bookshelf-express"],
           "options": {
-            "jestConfig": "apps/my-home-library-express/jest.config.ts",
+            "jestConfig": "apps/bookshelf-express/jest.config.ts",
             "passWithNoTests": true
           }
         }

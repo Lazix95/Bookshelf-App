@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">My Home Library</string>
-    <string name="title_activity_main">My Home Library</string>
-    <string name="package_name">com.myhomelib.lazix</string>
-    <string name="custom_url_scheme">com.myhomelib.lazix</string>
-</resources>
