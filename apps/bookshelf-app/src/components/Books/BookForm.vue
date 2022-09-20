@@ -93,7 +93,7 @@ export default class AddNewBookForm extends Vue {
       ...(this.changeImage &&
         this.book?.imageUrl &&
         !this.imageBlob && { deleteCover: true }),
-      ...(this.imageBlob && { imageBlob: this.imageBlob }),
+      ...(!!this.imageBlob && { imageBlob: this.imageBlob }),
     };
 
     this.$emit('onSubmitBookForm', payload);

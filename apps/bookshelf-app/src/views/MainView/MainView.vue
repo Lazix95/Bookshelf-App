@@ -10,15 +10,16 @@
       ></v-app-bar-nav-icon>
       <v-toolbar-title> {{ pageTitle }} </v-toolbar-title>
 
-      <v-btn
-        v-if="showAddButton"
-        class="ml-4"
-        color="primary"
-        elevation="2"
-        icon
-        :to="{ name: 'Books.add' }"
-      >
+      <v-btn v-if="showAddButton" class="ml-4" color="primary" elevation="2" icon :to="{ name: 'Books.add' }">
         <v-icon medium>add</v-icon>
+      </v-btn>
+
+      <v-btn v-if="showEditButton" class="ml-4" color="primary" elevation="2" icon>
+        <v-icon medium>edit</v-icon>
+      </v-btn>
+
+      <v-btn v-if="showDeleteButton" class="ml-4" color="red" elevation="2" icon>
+        <v-icon medium >delete_outline</v-icon>
       </v-btn>
 
       <v-spacer />
@@ -44,12 +45,24 @@ import DefaultDrawer from './Components/DefaultDrawer.vue';
 export default class MainView extends Vue {
   private drawerActive = null;
 
+  get routeMeta(): Record<string, unknown> {
+    return this.$route.meta || {};
+  }
+
   get pageTitle(): string {
-    return this.$route.meta.title;
+    return this.routeMeta.title as string;
   }
 
   get showAddButton(): boolean {
-    return this.$route.meta.add;
+    return !!this.routeMeta.add;
+  }
+
+  get showEditButton(): boolean {
+    return !!this.routeMeta.edit;
+  }
+
+  get showDeleteButton(): boolean {
+    return !!this.routeMeta.delete;
   }
 
   protected logout(): void {

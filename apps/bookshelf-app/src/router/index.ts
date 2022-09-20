@@ -40,7 +40,9 @@ const routes: Array<RouteConfig> = [
         name: 'Books.details',
         component: () => import('../components/Books/BookDetails.vue'),
         meta: {
-          title: 'Update Book',
+          title: 'Book Details',
+          edit: true,
+          delete: true,
         },
       },
       {

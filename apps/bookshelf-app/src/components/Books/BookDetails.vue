@@ -1,14 +1,13 @@
 <template>
-  <BasePageContent :loading="initLoading" class="BookForm">
-    <template v-slot:title>
-      <v-col class='text-center mb-3'>
-        <BaseTitle :value='book.name'/>
-      </v-col>
+  <BasePageContent :loading="initLoading" :title='book.name' :full-screen='true'>
+
+    <template v-slot:button>
+      <WidgetDropdownMenu/>
     </template>
 
-    <v-row justify="center">
+    <v-row justify="center" class='mt-3'>
       <v-col cols="6" class="pa-3">
-        <v-img v-if="book && book.imageUrl" style="width: 255px" class="BookForm--img p-relative" :src="book.imageUrl"/>
+        <v-img v-if="book && book.imageUrl" style="width: 255px" class="ma-auto mr-0" :src="book.imageUrl"/>
         <BookNoCover class="mr-0" v-else/>
       </v-col>
 
@@ -38,10 +37,12 @@ import BasePageContent from '../Base/BasePageContent.vue';
 import BaseTitle from '../Base/BaseTitle.vue';
 import BaseText from '../Base/BaseText.vue';
 import BookNoCover from './BookNoCover.vue';
+import WidgetDropdownMenu from '../widgets/WidgetDropdownMenu.vue';
 
 @Component({
   inheritAttrs: false,
   components: {
+    WidgetDropdownMenu,
     BookNoCover,
     BaseText,
     BaseTitle,
@@ -57,9 +58,4 @@ export default class AddNewBookForm extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.BookForm {
-  &--img {
-    margin: auto 0 auto auto;
-  }
-}
 </style>
