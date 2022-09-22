@@ -9,7 +9,8 @@
     @fetchBooks="fetchBooks"
     @onSubmitBookForm="handleSubmitBookForm"
     @deleteBook="handleDeleteBook"
-    @goToBook="goToBook"
+    @goToBookDetails="goToBookDetails"
+    @goToBookEdit="goToBookEdit"
   />
 </template>
 
@@ -85,8 +86,7 @@ export default class Books extends NavigationMixin {
 
   protected handleDeleteBook(bookID: string): void {
     this.deleteLoading = true;
-    this.$store
-      .dispatch('books/deleteBook', { bookID })
+    this.$store.dispatch('books/deleteBook', { bookID })
       .then(() => {
         this.deleteLoading = false;
       })

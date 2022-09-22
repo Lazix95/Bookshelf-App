@@ -84,7 +84,6 @@ export default class AddNewBookForm extends Vue {
   }
 
   protected onSubmit(): void {
-    console.log(this.image, this.imageBlob);
     let payload = {
       ...(this.book && { bookID: this.book.id }),
       name: this.name,

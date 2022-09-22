@@ -1,5 +1,5 @@
 <template>
-  <BasePageContent :loading="initLoading" :title='book.name' :full-screen='true'>
+  <BasePageContent :loading="initLoading" :title='(book || {}).name || ""' :full-screen='true'>
 
     <template v-slot:button>
       <WidgetDropdownMenu/>
@@ -25,11 +25,16 @@
         </v-row>
       </v-col>
     </v-row>
+
+    <WidgetConfirmDeleteDialog
+      ref="confirmDialog"
+      @confirm="handleDeleteBook"
+    />
   </BasePageContent>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 import { Cropper } from 'vue-advanced-cropper';
 import 'vue-advanced-cropper/dist/style.css';
 import type { Book } from '../../store/modules/books/models';
@@ -38,10 +43,13 @@ import BaseTitle from '../Base/BaseTitle.vue';
 import BaseText from '../Base/BaseText.vue';
 import BookNoCover from './BookNoCover.vue';
 import WidgetDropdownMenu from '../widgets/WidgetDropdownMenu.vue';
+import { DELETE_HEADER_BUTTON_CLICKED, EDIT_HEADER_BUTTON_CLICKED, headerEventBus } from '../../event-busses/HeaderBus';
+import WidgetConfirmDeleteDialog, { WidgetConfirmDeleteDialogRef } from '../widgets/WidgetConfirmDeleteDialog.vue';
 
 @Component({
   inheritAttrs: false,
   components: {
+    WidgetConfirmDeleteDialog,
     WidgetDropdownMenu,
     BookNoCover,
     BaseText,
@@ -54,6 +62,39 @@ export default class AddNewBookForm extends Vue {
   @Prop() readonly submitLoading!: boolean;
   @Prop() readonly initLoading!: boolean;
   @Prop() readonly book!: Book;
+
+  protected handleEditButton(): void {
+    this.$emit('goToBookEdit', this.book.id)
+  }
+
+  protected confirmDelete(): void {
+    const confirmDialog = this.$refs.confirmDialog as WidgetConfirmDeleteDialogRef;
+
+    const message = `Are you sure you want to delete <strong>${this.book.name}</strong> by <strong>${this.book.author}</strong> ?`;
+    confirmDialog.open({ prop: this.book.id, message });
+  }
+
+  protected handleDeleteBook(bookID: string): void {
+    this.$emit('deleteBook', bookID);
+  }
+
+  protected startListeners(): void {
+    headerEventBus.$on(EDIT_HEADER_BUTTON_CLICKED, this.handleEditButton);
+    headerEventBus.$on(DELETE_HEADER_BUTTON_CLICKED, this.confirmDelete);
+  }
+
+  protected endListeners(): void {
+    headerEventBus.$off(EDIT_HEADER_BUTTON_CLICKED, this.handleEditButton);
+    headerEventBus.$off(DELETE_HEADER_BUTTON_CLICKED, this.confirmDelete);
+  }
+
+  protected mounted(): void {
+    this.startListeners();
+  }
+
+  protected destroyed(): void {
+    this.endListeners();
+  }
 }
 </script>
 

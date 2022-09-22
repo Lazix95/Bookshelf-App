@@ -14,11 +14,11 @@
         <v-icon medium>add</v-icon>
       </v-btn>
 
-      <v-btn v-if="showEditButton" class="ml-4" color="primary" elevation="2" icon>
+      <v-btn v-if="showEditButton" class="ml-4" color="primary" elevation="2" icon @click='handleEditClick'>
         <v-icon medium>edit</v-icon>
       </v-btn>
 
-      <v-btn v-if="showDeleteButton" class="ml-4" color="red" elevation="2" icon>
+      <v-btn v-if="showDeleteButton" class="ml-4" color="red" elevation="2" icon @click='handleDeleteClick'>
         <v-icon medium >delete_outline</v-icon>
       </v-btn>
 
@@ -37,6 +37,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { throwHeaderEditEvent, throwHeaderDeleteEvent } from '../../event-busses/HeaderBus';
 import DefaultDrawer from './Components/DefaultDrawer.vue';
 
 @Component({
@@ -67,6 +68,14 @@ export default class MainView extends Vue {
 
   protected logout(): void {
     this.$store.dispatch('auth/logout');
+  }
+
+  protected handleEditClick(): void {
+    throwHeaderEditEvent();
+  }
+
+  protected handleDeleteClick(): void {
+    throwHeaderDeleteEvent();
   }
 }
 </script>

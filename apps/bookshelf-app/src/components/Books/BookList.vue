@@ -14,10 +14,6 @@
           />
         </template>
       </v-row>
-      <WidgetConfirmDeleteDialog
-        ref="confirmDialog"
-        @confirm="handleDeleteBook"
-      />
     </v-container>
   </BasePageContent>
 </template>
@@ -39,19 +35,7 @@ export default class BookList extends Vue {
   @Prop() readonly books!: Book[];
 
   protected handleGoToBook(bookID: string): void {
-    this.$emit('goToBook', bookID);
-  }
-
-  protected confirmDelete(book: Book): void {
-    const confirmDialog = this.$refs
-      .confirmDialog as WidgetConfirmDeleteDialogRef;
-
-    const message = `Are you sure you want to delete <strong>${book.name}</strong> by <strong>${book.author}</strong> ?`;
-    confirmDialog.open({ prop: book.id, message });
-  }
-
-  protected handleDeleteBook(bookID: string): void {
-    this.$emit('deleteBook', bookID);
+    this.$emit('goToBookDetails', bookID);
   }
 
   mounted(): void {
