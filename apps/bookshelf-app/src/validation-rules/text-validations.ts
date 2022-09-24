@@ -27,7 +27,7 @@ export function ruleAtLeastOneNumber(fieldName: string): Array<unknown> {
 
 export function ruleSameAsField(fieldName: string, sameAsField: string, refValue: string): Array<unknown> {
   return [
-    [(value: string) => (value === refValue) || `${fieldName} must be same as ${sameAsField}`],
+    (value: string) => (value === refValue) || `${fieldName} must be same as ${sameAsField}`,
   ]
 }
 

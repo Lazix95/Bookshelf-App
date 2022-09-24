@@ -38,6 +38,7 @@ export const authActions = <ActionTree<AuthState, unknown>>{
   register({ commit }, payload: RegisterApiPayload) {
     return authApi.register(payload).then((response) => {
       commit('login', response.data);
+      commit('saveToStorage', {token: response.data.token});
       return response;
     });
   },
