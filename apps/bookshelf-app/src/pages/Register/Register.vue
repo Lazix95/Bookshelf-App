@@ -6,14 +6,12 @@
         <p class="subtitle">Please make sure all fields are filled in correctly.</p>
         <v-divider class="pb-5 mt-3"></v-divider>
         <BaseForm @submit="handleSignUp">
-          <v-text-field dense v-model="firstName" outlined label="First Name" :rules='firstNameRules'/>
-          <v-text-field dense v-model="lastName" outlined label="Last Name" :rules='lastNameRules' />
-          <v-text-field dense v-model="email" outlined label="E-mail" :rules='emailRules' />
-          <v-text-field type="password" dense v-model="password" outlined label="Password" :rules='passwordRules' />
-          <v-text-field type="password" dense v-model="confirmPassword" outlined label="Confirm Password" :rules="confirmPasswordRules" />
-          <v-btn :loading="submitLoading" width="100%" color="primary" type="submit">
-            Submit
-          </v-btn>
+          <BaseTextField v-model="firstName" label="First Name" :rules='firstNameRules'/>
+          <BaseTextField v-model="lastName" label="Last Name" :rules='lastNameRules' />
+          <BaseTextField v-model="email" label="E-mail" :rules='emailRules' />
+          <BaseTextField type="password" v-model="password" label="Password" :rules='passwordRules' />
+          <BaseTextField type="password" v-model="confirmPassword" label="Confirm Password" :rules="confirmPasswordRules" />
+          <BaseBtn :loading="submitLoading" width="100%" color="primary" type="submit" text="Submit"/>
         </BaseForm>
       </v-col>
     </v-row>
@@ -30,8 +28,10 @@ import {
   ruleFieldRequiredMinMax, ruleSameAsField
 } from '../../validation-rules/text-validations';
 import BaseForm from '../../components/Base/BaseForm.vue';
+import BaseTextField from '../../components/Base/BaseTextField.vue';
+import BaseBtn from '../../components/Base/BaseBtn.vue';
 @Component({
-  components: { BaseForm }
+  components: { BaseBtn, BaseTextField, BaseForm }
 })
 export default class Login extends Vue {
   private firstName = '';
