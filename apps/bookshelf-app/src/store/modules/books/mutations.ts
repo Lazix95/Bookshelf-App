@@ -6,6 +6,10 @@ export const authMutations = <MutationTree<BooksState>>{
     state.books = payload;
   },
 
+  getOneBook: (state, payload: Book) => {
+    state.book = payload;
+  },
+
   storeBook: (state, payload: Book) => {
     state.books = [...state.books, payload];
   },

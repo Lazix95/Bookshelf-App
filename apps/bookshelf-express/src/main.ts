@@ -60,13 +60,7 @@ app.use((error, req, res, next) => {
 
 const port = process.env.port || 3333;
 console.log(process.env.MONGO_DB_URI)
-mongoose
-  .connect(process.env.MONGO_DB_URI, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
+mongoose.connect(process.env.MONGO_DB_URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}).then(() => {
     const server = app.listen(port, () => {
       console.log(
         `Listening at http://localhost:${port}/api`,
@@ -74,5 +68,4 @@ mongoose
       );
     });
     server.on('error', console.error);
-  })
-  .catch((err) => console.log('MongoDB Error => ', err));
+  }).catch((err) => console.log('MongoDB Error => ', err));

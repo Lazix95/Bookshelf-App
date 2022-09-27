@@ -14,37 +14,10 @@ import { runValidator } from '../validators';
 import uploadFile from '../middleware/firebaseStorage';
 const router = express.Router();
 
-const isObjectId = validateObjectIdQueryFnc(
-  'collectionID',
-  'Collection Not Found!!!!'
-);
+const isObjectId = validateObjectIdQueryFnc('collectionID', 'Collection Not Found!!!!');
 
 router.get('/collections', isAuth, getCollections);
-router.get(
-  '/collections/:collectionID',
-  isAuth,
-  isObjectId,
-  runValidator,
-  getCollectionToReq,
-  getOneCollection
-);
+router.get('/collections/:collectionID', isAuth, isObjectId, runValidator, getCollectionToReq, getOneCollection);
 
-router.post(
-  '/collections',
-  isAuth,
-  multer,
-  required('name'),
-  runValidator,
-  uploadFile,
-  postCollection
-);
-router.put(
-  '/collections/:collectionID',
-  isAuth,
-  multer,
-  isObjectId,
-  required('name'),
-  runValidator,
-  getCollectionToReq,
-  putCollection
-);
+router.post('/collections', isAuth, multer, required('name'), runValidator, uploadFile, postCollection);
+router.put('/collections/:collectionID', isAuth, multer, isObjectId, required('name'), runValidator, getCollectionToReq, putCollection);

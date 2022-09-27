@@ -1,10 +1,6 @@
 <template>
   <BasePageContent :loading="initLoading" :title='(book || {}).name || ""' :full-screen='true'>
 
-    <template v-slot:button>
-      <WidgetDropdownMenu/>
-    </template>
-
     <v-row justify="center" class='mt-3'>
       <v-col cols="6" class="pa-3">
         <v-img v-if="book && book.imageUrl" style="width: 255px" class="ma-auto mr-0" :src="book.imageUrl"/>
@@ -26,10 +22,7 @@
       </v-col>
     </v-row>
 
-    <WidgetConfirmDeleteDialog
-      ref="confirmDialog"
-      @confirm="handleDeleteBook"
-    />
+    <WidgetConfirmDialog ref="confirmDialog" :close-after-loading="true" :is-loading="deleteLoading" @confirm="handleDeleteBook" />
   </BasePageContent>
 </template>
 
@@ -44,12 +37,12 @@ import BaseText from '../Base/BaseText.vue';
 import BookNoCover from './BookNoCover.vue';
 import WidgetDropdownMenu from '../widgets/WidgetDropdownMenu.vue';
 import { DELETE_HEADER_BUTTON_CLICKED, EDIT_HEADER_BUTTON_CLICKED, headerEventBus } from '../../event-busses/HeaderBus';
-import WidgetConfirmDeleteDialog, { WidgetConfirmDeleteDialogRef } from '../widgets/WidgetConfirmDeleteDialog.vue';
+import WidgetConfirmDialog, { WidgetConfirmDialogRef } from '../widgets/WidgetConfirmDeleteDialog.vue';
 
 @Component({
   inheritAttrs: false,
   components: {
-    WidgetConfirmDeleteDialog,
+    WidgetConfirmDialog,
     WidgetDropdownMenu,
     BookNoCover,
     BaseText,
@@ -60,18 +53,21 @@ import WidgetConfirmDeleteDialog, { WidgetConfirmDeleteDialogRef } from '../widg
 })
 export default class AddNewBookForm extends Vue {
   @Prop() readonly submitLoading!: boolean;
+  @Prop() readonly deleteLoading!: boolean;
   @Prop() readonly initLoading!: boolean;
   @Prop() readonly book!: Book;
+
+  get confirmDialog(): WidgetConfirmDialogRef {
+    return this.$refs.confirmDialog as WidgetConfirmDialogRef;
+  }
 
   protected handleEditButton(): void {
     this.$emit('goToBookEdit', this.book.id)
   }
 
   protected confirmDelete(): void {
-    const confirmDialog = this.$refs.confirmDialog as WidgetConfirmDeleteDialogRef;
-
     const message = `Are you sure you want to delete <strong>${this.book.name}</strong> by <strong>${this.book.author}</strong> ?`;
-    confirmDialog.open({ prop: this.book.id, message });
+    this.confirmDialog.open({ prop: this.book.id, message });
   }
 
   protected handleDeleteBook(bookID: string): void {

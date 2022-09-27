@@ -5,11 +5,13 @@
         <BaseTitle level="2">Sing in to your library</BaseTitle>
         <BaseText size="14">Please enter your email and password</BaseText>
         <v-divider class="pb-5 mt-3"></v-divider>
-        <BaseTextField v-model="email" label="E-mail" />
-        <BaseTextField type="password" hide-details v-model="password" label="Password" @keyup.enter="onLogin"/>
+        <BaseForm @submit="onLogin">
+          <BaseTextField v-model="email" label="E-mail" email />
+          <BaseTextField password v-model="password" label="Password"/>
 
-        <BaseCheckbox label="Remember Me" v-model="rememberMe"/>
-        <BaseBtn :loading="submitLoading" width="100%" color="primary" @click="onLogin" text="Login"/>
+          <BaseCheckbox class="mt-0 pt-0" label="Remember Me" v-model="rememberMe"/>
+          <BaseBtn :loading="submitLoading" width="100%" color="primary" submit text="Login"/>
+        </BaseForm>
 
         <v-divider class="pb-3 mt-3"></v-divider>
 
@@ -32,8 +34,9 @@ import BaseTextField from '../../components/Base/BaseTextField.vue';
 import BaseBtn from '../../components/Base/BaseBtn.vue';
 import WidgetTextWithLink from '../../components/widgets/WidgetTextWithLink.vue';
 import BaseCheckbox from '../../components/Base/BaseCheckbox.vue';
+import BaseForm from '../../components/Base/BaseForm.vue';
 @Component({
-  components: { BaseCheckbox, WidgetTextWithLink, BaseBtn, BaseTextField, BaseText, BaseTitle }
+  components: { BaseForm, BaseCheckbox, WidgetTextWithLink, BaseBtn, BaseTextField, BaseText, BaseTitle }
 })
 export default class Login extends Vue {
   private email = '';

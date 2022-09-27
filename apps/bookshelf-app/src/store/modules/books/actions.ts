@@ -12,7 +12,9 @@ export const authActions = <ActionTree<BooksState, unknown>>{
 
   getOneBook({ commit }, payload: { bookID: number }) {
     return booksApi.getOneBook(payload.bookID).then((res) => {
-      return res.data.book;
+      const book = res.data.book
+      commit('getOneBook', book);
+      return book;
     });
   },
 
@@ -34,5 +36,9 @@ export const authActions = <ActionTree<BooksState, unknown>>{
     return booksApi.deleteBook(payload.bookID).then(() => {
       commit('deleteBook', payload.bookID);
     });
+  },
+
+  clearBook({ commit }) {
+    commit('getOneBook', null);
   },
 };

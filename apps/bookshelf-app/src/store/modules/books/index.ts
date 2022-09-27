@@ -7,6 +7,7 @@ import { authGetters } from './getters';
 export function setBookState(): BooksState {
   return {
     books: [],
+    book: null,
   };
 }
 

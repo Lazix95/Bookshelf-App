@@ -8,4 +8,5 @@ export interface Book {
 
 export interface BooksState {
   books: Book[];
+  book: Book | null;
 }
