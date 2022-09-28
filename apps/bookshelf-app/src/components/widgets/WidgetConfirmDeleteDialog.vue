@@ -3,9 +3,7 @@
     <v-card>
       <v-card-title class="text-h5 lighten-2" v-html="title || 'Confirm'" />
 
-      <v-card-text>
-        {{message}}
-      </v-card-text>
+      <v-card-text v-html="message"/> <!-- This must be in v-html because of possible tags like <strong> or <i> in message-->
 
       <v-divider></v-divider>
 

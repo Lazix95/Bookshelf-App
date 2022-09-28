@@ -41,9 +41,9 @@ import BasePageContent from '../Base/BasePageContent.vue';
   },
 })
 export default class AddNewBookForm extends Vue {
-  @Prop() readonly submitLoading!: boolean;
-  @Prop() readonly initLoading!: boolean;
-  @Prop() readonly book!: Book;
+  @Prop({default: false, type: Boolean}) readonly submitLoading!: boolean;
+  @Prop({default: false, type: Boolean}) readonly initLoading!: boolean;
+  @Prop({default: null, type: Object}) readonly book!: Book;
 
   protected image = null;
   protected imageSrc = '';

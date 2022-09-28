@@ -1,10 +1,7 @@
 <template>
   <v-app>
     <!-- If route is PUBLIC and user is not logged in, view cannot be "MainView" -->
-    <component
-      :is="view"
-      v-if="(isLoggedIn || isPublicRoute) && !isAutoLoginLoading"
-    >
+    <component :is="view" v-if="(isLoggedIn || isPublicRoute) && !isAutoLoginLoading">
       <router-view />
     </component>
     <Login v-else-if="!isAutoLoginLoading" />
@@ -30,26 +27,30 @@ export default class App extends Vue {
   }
 
   get isPublicRoute(): boolean {
-    return this.$route.meta.publicRoute;
+    return this.$route.meta?.publicRoute;
   }
 
   get view(): string {
     const registeredViews = ['MainView', 'EmptyView'];
-    const view = this.$route.meta.view;
+    const view = this.$route.meta?.view;
     const defaultView = registeredViews[0];
     if (!view) return defaultView;
     const isViewRegistered = registeredViews.includes(view);
     return isViewRegistered ? view : defaultView;
   }
 
-  mounted(): void {
+  protected mounted(): void {
     this.$store
       .dispatch('auth/tryAutoLogin')
       .then(() => {
-        this.isAutoLoginLoading = false;
+        setTimeout(() => {
+          this.isAutoLoginLoading = false;
+        }, 250)
       })
       .catch(() => {
-        this.isAutoLoginLoading = false;
+        setTimeout(() => {
+          this.isAutoLoginLoading = false;
+        }, 250)
       });
   }
 }

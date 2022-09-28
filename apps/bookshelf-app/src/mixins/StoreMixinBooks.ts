@@ -56,7 +56,7 @@ export class StoreMixinBooks extends Vue {
     });
   }
 
-  protected handleSubmitBookForm(payload: BookApiPayload): void {
+  protected Books_handleSubmitBookForm(payload: BookApiPayload): void {
     this.Books_submitLoading = true;
     this.$store.dispatch(payload.bookID ? 'books/updateBook' : 'books/storeBook', payload).then((book: Book) => {
       this.Books_submitLoading = false;
@@ -67,7 +67,7 @@ export class StoreMixinBooks extends Vue {
     });
   }
 
-  protected handleDeleteBook(bookID: string): void {
+  protected Books_handleDeleteBook(bookID: string): void {
     this.Books_deleteLoading = true;
     this.$store.dispatch('books/deleteBook', { bookID }).then(() => {
       this.Books_deleteLoading = false;
@@ -78,7 +78,7 @@ export class StoreMixinBooks extends Vue {
     });
   }
 
-  protected clearBook() {
+  protected Books_clearBook() {
     this.$store.dispatch('books/clearBook');
     this.lastFetched = null;
     this.Books_initLoading = false;

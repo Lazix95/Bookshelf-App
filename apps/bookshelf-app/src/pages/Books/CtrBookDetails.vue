@@ -1,5 +1,5 @@
 <template>
-  <BookDetails :initLoading="Books_initLoading" :deleteLoading="Books_deleteLoading" :book="Books_book" @deleteBook="handleDeleteBook"/>
+  <BookDetails :initLoading="Books_initLoading" :deleteLoading="Books_deleteLoading" :book="Books_book" @deleteBook="Books_handleDeleteBook" @goToBookEdit="goToBookEdit"/>
 </template>
 
 <script lang="ts">

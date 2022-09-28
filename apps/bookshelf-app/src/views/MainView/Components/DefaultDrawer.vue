@@ -8,7 +8,7 @@
 
     <v-divider></v-divider>
     <v-list nav>
-      <v-list-item link :to="{ name: 'Books' }">
+      <v-list-item link :to="{name: 'Books'}">
         <v-list-item-content>
           <v-list-item-title>Books</v-list-item-title>
         </v-list-item-content>

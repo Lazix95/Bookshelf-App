@@ -1,62 +1,30 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
+import store from './../store';
+import bookRoutes from './BookRoutes';
+import authRoutes from './AuthRoutes';
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
-  {
-    path: '/register',
-    name: 'register',
-    component: () => import('./../pages/Register/Register.vue'),
+  ...bookRoutes,
+  ...authRoutes,
 
+  {
+    path: '/',
+    name: 'landing',
+    beforeEnter: async (to, from, next) => {
+      await new Promise((resolve) => setTimeout(resolve, 200));
+      const isLoggedIn = store.getters['auth/isLoggedIn'];
+      if (isLoggedIn) next({name: 'Books'});
+      next();
+    },
+    component: () => import('./../pages/CtrLanding.vue'),
     meta: {
       view: 'EmptyView',
       publicRoute: true,
-    },
-  },
-
-  {
-    path: '/book/:bookID/details',
-    name: 'Books.details',
-    component: () => import('../pages/Books/CtrBookDetails.vue'),
-    meta: {
-      title: 'Book Details',
-      edit: true,
-      delete: true,
-    },
-  },
-
-  {
-    path: '',
-    component: () => import('../pages/Books/Books.vue'),
-    children: [
-      {
-        path: '',
-        name: 'Books',
-        component: () => import('../components/Books/BookList.vue'),
-        meta: {
-          title: 'Books',
-          add: true,
-        },
-      },
-      {
-        path: '/book/:bookID',
-        name: 'Books.edit',
-        component: () => import('../components/Books/BookForm.vue'),
-        meta: {
-          title: 'Update Book',
-        },
-      },
-      {
-        path: 'add-new-book',
-        name: 'Books.add',
-        component: () => import('../components/Books/BookForm.vue'),
-        meta: {
-          title: 'Add New Book',
-        },
-      },
-    ],
-  },
+    }
+  }
 ];
 
 console.log(process.env.BASE_URL);

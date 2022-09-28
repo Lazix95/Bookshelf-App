@@ -10,7 +10,6 @@
             :publisher="book.publisher"
             :src="book.imageUrl"
             @goToBook="handleGoToBook(book.id)"
-            @deleteBook="confirmDelete(book)"
           />
         </template>
       </v-row>
@@ -22,13 +21,10 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import BookListItem from './BookListItem.vue';
 import type { Book } from '../../store/modules/books/models';
-import WidgetConfirmDeleteDialog, {
-  WidgetConfirmDeleteDialogRef,
-} from '../widgets/WidgetConfirmDeleteDialog.vue';
 import BasePageContent from '../Base/BasePageContent.vue';
 @Component({
   inheritAttrs: false,
-  components: { BasePageContent, WidgetConfirmDeleteDialog, BookListItem },
+  components: { BasePageContent, BookListItem },
 })
 export default class BookList extends Vue {
   @Prop() readonly initLoading!: boolean;
