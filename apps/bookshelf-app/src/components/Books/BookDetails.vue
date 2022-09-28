@@ -52,10 +52,9 @@ import WidgetConfirmDialog, { WidgetConfirmDialogRef } from '../widgets/WidgetCo
   },
 })
 export default class AddNewBookForm extends Vue {
-  @Prop() readonly submitLoading!: boolean;
-  @Prop() readonly deleteLoading!: boolean;
-  @Prop() readonly initLoading!: boolean;
-  @Prop() readonly book!: Book;
+  @Prop({default: false, type: Boolean}) readonly deleteLoading!: boolean;
+  @Prop({default: false, type: Boolean}) readonly initLoading!: boolean;
+  @Prop({default: null, type: Object}) readonly book!: Book;
 
   get confirmDialog(): WidgetConfirmDialogRef {
     return this.$refs.confirmDialog as WidgetConfirmDialogRef;

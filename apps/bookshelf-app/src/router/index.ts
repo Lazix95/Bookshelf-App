@@ -14,6 +14,18 @@ const routes: Array<RouteConfig> = [
       publicRoute: true,
     },
   },
+
+  {
+    path: '/book/:bookID/details',
+    name: 'Books.details',
+    component: () => import('../pages/Books/CtrBookDetails.vue'),
+    meta: {
+      title: 'Book Details',
+      edit: true,
+      delete: true,
+    },
+  },
+
   {
     path: '',
     component: () => import('../pages/Books/Books.vue'),
@@ -33,16 +45,6 @@ const routes: Array<RouteConfig> = [
         component: () => import('../components/Books/BookForm.vue'),
         meta: {
           title: 'Update Book',
-        },
-      },
-      {
-        path: '/book/:bookID/details',
-        name: 'Books.details',
-        component: () => import('../components/Books/BookDetails.vue'),
-        meta: {
-          title: 'Book Details',
-          edit: true,
-          delete: true,
         },
       },
       {
