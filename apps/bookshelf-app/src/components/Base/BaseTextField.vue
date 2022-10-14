@@ -1,5 +1,5 @@
 <template>
-  <v-text-field dense outlined :hide-details="hideDetails" v-model="propValue" :label="label" :type="implicatedType" :rules="predefinedRules" v-on="$listeners" v-bind="$attrs" />
+  <v-text-field dense outlined :hide-details="hideDetails" v-model="propValue" :label="label" :type="implicatedType" :rules="predefinedRules" :validate-on-blur="validateOnBlur" v-on="$listeners" v-bind="$attrs" />
 </template>
 
 <script lang="ts">
@@ -21,6 +21,7 @@ export default class BaseTextField extends Vue {
   @Prop({default: false, type: Boolean}) protected email!: boolean;
   @Prop({default: false, type: Boolean}) protected password!: boolean;
   @Prop({default: false, type: Boolean}) protected hideDetails!: boolean;
+  @Prop({default: true, type: Boolean}) protected validateOnBlur!: boolean;
   @Prop({default: () => [], type: Array}) protected rules!: Array<unknown>;
   @Prop({default: true, type: Boolean}) protected autoSetRules!: boolean;
 

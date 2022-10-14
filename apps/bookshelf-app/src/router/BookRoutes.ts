@@ -1,16 +1,6 @@
 import { RouteConfig } from 'vue-router';
 
 const bookRoutes: Array<RouteConfig> = [
-  {
-    path: '/books/:bookID/details',
-    name: 'Books.details',
-    component: () => import('../pages/Books/CtrBookDetails.vue'),
-    meta: {
-      title: 'Book Details',
-      edit: true,
-      delete: true,
-    },
-  },
 
   {
     path: '/books',
@@ -19,6 +9,17 @@ const bookRoutes: Array<RouteConfig> = [
     meta: {
       title: 'Books',
       add: true,
+    },
+  },
+
+  {
+    path: '/books/:bookID/details',
+    name: 'Books.details',
+    component: () => import('../pages/Books/CtrBookDetails.vue'),
+    meta: {
+      title: 'Book Details',
+      edit: true,
+      delete: true,
     },
   },
 

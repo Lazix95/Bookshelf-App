@@ -14,7 +14,7 @@
         </v-list-item-content>
       </v-list-item>
 
-      <v-list-item link>
+      <v-list-item link :to="{name: 'Collections'}">
         <v-list-item-content>
           <v-list-item-title>Collections</v-list-item-title>
         </v-list-item-content>
