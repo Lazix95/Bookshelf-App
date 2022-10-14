@@ -26,31 +26,16 @@ interface MeResponse {
 }
 
 export class authApi {
-  static register(
-    payload: RegisterApiPayload
-  ): Promise<AxiosResponse<LoginResponse>> {
-    return sendRequest<LoginResponse>({
-      method: 'post',
-      url: '/register',
-      data: payload,
-    });
+  static register(payload: RegisterApiPayload): Promise<AxiosResponse<LoginResponse>> {
+    return sendRequest<LoginResponse>({ method: 'post', url: '/register', data: payload, });
   }
 
-  static login(
-    payload: LoginApiPayload
-  ): Promise<AxiosResponse<LoginResponse>> {
-    return sendRequest<LoginResponse>({
-      method: 'post',
-      url: '/login',
-      data: payload,
-    });
+  static login(payload: LoginApiPayload): Promise<AxiosResponse<LoginResponse>> {
+    return sendRequest<LoginResponse>({ method: 'post', url: '/login', data: payload, });
   }
 
   static me(token: string): Promise<AxiosResponse<MeResponse>> {
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-
+    const headers = { Authorization: `Bearer ${token}`, };
     return sendRequest<MeResponse>({ method: 'get', url: '/me', headers });
   }
 }
